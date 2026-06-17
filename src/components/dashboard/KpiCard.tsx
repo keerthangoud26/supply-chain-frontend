@@ -36,7 +36,7 @@ export function KpiCard({
     red: "from-[var(--danger)] to-[var(--neon-pink)]",
   };
   return (
-    <div className="group relative glass rounded-2xl p-5 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-white/20">
+    <div className="group relative glass rounded-2xl p-5 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-foreground/20">
       <div className={cn("absolute -top-12 -right-12 h-32 w-32 rounded-full blur-3xl opacity-30 group-hover:opacity-50 transition bg-gradient-to-br", accentMap[accent])} />
       <div className="relative flex items-start justify-between gap-4">
         <div className="min-w-0">
