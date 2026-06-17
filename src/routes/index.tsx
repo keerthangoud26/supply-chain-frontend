@@ -1,20 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { Sidebar } from "@/components/dashboard/Sidebar";
-import { Header } from "@/components/dashboard/Header";
+import { AppShell } from "@/components/dashboard/AppShell";
 import { DashboardContent } from "@/components/dashboard/DashboardContent";
-
-const titles: Record<string, string> = {
-  overview: "Dashboard Overview",
-  inventory: "Inventory Intelligence",
-  supplier: "Supplier Intelligence",
-  logistics: "Logistics Analytics",
-  ai: "AI Prediction Engine",
-  anomaly: "Shipment Anomaly Detection",
-  realtime: "Real-Time Monitoring",
-  reports: "Reports & Insights",
-  settings: "Settings",
-};
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,20 +11,9 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Enterprise AI dashboard for global supply chain intelligence." },
     ],
   }),
-  component: Index,
+  component: () => (
+    <AppShell title="Dashboard Overview">
+      <DashboardContent />
+    </AppShell>
+  ),
 });
-
-function Index() {
-  const [active, setActive] = useState("overview");
-  return (
-    <div className="flex min-h-screen w-full text-foreground">
-      <Sidebar active={active} onSelect={setActive} />
-      <div className="flex-1 min-w-0 flex flex-col">
-        <Header title={titles[active] ?? "Dashboard"} />
-        <main className="flex-1">
-          <DashboardContent />
-        </main>
-      </div>
-    </div>
-  );
-}
