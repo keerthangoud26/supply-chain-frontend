@@ -9,8 +9,56 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SupplierRouteImport } from './routes/supplier'
+import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as ReportsRouteImport } from './routes/reports'
+import { Route as RealtimeRouteImport } from './routes/realtime'
+import { Route as LogisticsRouteImport } from './routes/logistics'
+import { Route as InventoryRouteImport } from './routes/inventory'
+import { Route as AnomalyRouteImport } from './routes/anomaly'
+import { Route as AiRouteImport } from './routes/ai'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SupplierRoute = SupplierRouteImport.update({
+  id: '/supplier',
+  path: '/supplier',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsRoute = ReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RealtimeRoute = RealtimeRouteImport.update({
+  id: '/realtime',
+  path: '/realtime',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LogisticsRoute = LogisticsRouteImport.update({
+  id: '/logistics',
+  path: '/logistics',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventoryRoute = InventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnomalyRoute = AnomalyRouteImport.update({
+  id: '/anomaly',
+  path: '/anomaly',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiRoute = AiRouteImport.update({
+  id: '/ai',
+  path: '/ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +67,144 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ai': typeof AiRoute
+  '/anomaly': typeof AnomalyRoute
+  '/inventory': typeof InventoryRoute
+  '/logistics': typeof LogisticsRoute
+  '/realtime': typeof RealtimeRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
+  '/supplier': typeof SupplierRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ai': typeof AiRoute
+  '/anomaly': typeof AnomalyRoute
+  '/inventory': typeof InventoryRoute
+  '/logistics': typeof LogisticsRoute
+  '/realtime': typeof RealtimeRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
+  '/supplier': typeof SupplierRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ai': typeof AiRoute
+  '/anomaly': typeof AnomalyRoute
+  '/inventory': typeof InventoryRoute
+  '/logistics': typeof LogisticsRoute
+  '/realtime': typeof RealtimeRoute
+  '/reports': typeof ReportsRoute
+  '/settings': typeof SettingsRoute
+  '/supplier': typeof SupplierRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/ai'
+    | '/anomaly'
+    | '/inventory'
+    | '/logistics'
+    | '/realtime'
+    | '/reports'
+    | '/settings'
+    | '/supplier'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/ai'
+    | '/anomaly'
+    | '/inventory'
+    | '/logistics'
+    | '/realtime'
+    | '/reports'
+    | '/settings'
+    | '/supplier'
+  id:
+    | '__root__'
+    | '/'
+    | '/ai'
+    | '/anomaly'
+    | '/inventory'
+    | '/logistics'
+    | '/realtime'
+    | '/reports'
+    | '/settings'
+    | '/supplier'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AiRoute: typeof AiRoute
+  AnomalyRoute: typeof AnomalyRoute
+  InventoryRoute: typeof InventoryRoute
+  LogisticsRoute: typeof LogisticsRoute
+  RealtimeRoute: typeof RealtimeRoute
+  ReportsRoute: typeof ReportsRoute
+  SettingsRoute: typeof SettingsRoute
+  SupplierRoute: typeof SupplierRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/supplier': {
+      id: '/supplier'
+      path: '/supplier'
+      fullPath: '/supplier'
+      preLoaderRoute: typeof SupplierRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports': {
+      id: '/reports'
+      path: '/reports'
+      fullPath: '/reports'
+      preLoaderRoute: typeof ReportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/realtime': {
+      id: '/realtime'
+      path: '/realtime'
+      fullPath: '/realtime'
+      preLoaderRoute: typeof RealtimeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/logistics': {
+      id: '/logistics'
+      path: '/logistics'
+      fullPath: '/logistics'
+      preLoaderRoute: typeof LogisticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/inventory': {
+      id: '/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof InventoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/anomaly': {
+      id: '/anomaly'
+      path: '/anomaly'
+      fullPath: '/anomaly'
+      preLoaderRoute: typeof AnomalyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai': {
+      id: '/ai'
+      path: '/ai'
+      fullPath: '/ai'
+      preLoaderRoute: typeof AiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,6 +217,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AiRoute: AiRoute,
+  AnomalyRoute: AnomalyRoute,
+  InventoryRoute: InventoryRoute,
+  LogisticsRoute: LogisticsRoute,
+  RealtimeRoute: RealtimeRoute,
+  ReportsRoute: ReportsRoute,
+  SettingsRoute: SettingsRoute,
+  SupplierRoute: SupplierRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

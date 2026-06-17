@@ -2,13 +2,13 @@ import { Bell, Search, Settings, ChevronRight } from "lucide-react";
 
 export function Header({ title, breadcrumb }: { title: string; breadcrumb?: string }) {
   return (
-    <header className="sticky top-0 z-30 border-b border-white/5 bg-[#0B0F1A]/70 backdrop-blur-2xl">
+    <header className="sticky top-0 z-30 border-b border-border bg-card/70 backdrop-blur-2xl">
       <div className="flex items-center gap-4 px-4 md:px-8 h-16">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
             <span>Nexus</span>
             <ChevronRight className="h-3 w-3" />
-            <span className="text-[var(--neon-cyan)]">{breadcrumb ?? title}</span>
+            <span className="text-[var(--neon-blue)]">{breadcrumb ?? title}</span>
           </div>
           <h1 className="text-lg md:text-xl font-bold truncate">{title}</h1>
         </div>
@@ -18,9 +18,9 @@ export function Header({ title, breadcrumb }: { title: string; breadcrumb?: stri
           <input
             type="search"
             placeholder="Search products, suppliers, shipments..."
-            className="w-full glass rounded-xl pl-9 pr-16 py-2.5 text-sm placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-[var(--neon-purple)]/50"
+            className="w-full glass rounded-xl pl-9 pr-16 py-2.5 text-sm placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-[var(--neon-blue)]/50"
           />
-          <kbd className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] font-mono text-muted-foreground bg-white/5 border border-white/10 rounded px-1.5 py-0.5">⌘K</kbd>
+          <kbd className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] font-mono text-muted-foreground bg-foreground/5 border border-border rounded px-1.5 py-0.5">⌘K</kbd>
         </div>
 
         <div className="flex items-center gap-2">
@@ -31,14 +31,14 @@ export function Header({ title, breadcrumb }: { title: string; breadcrumb?: stri
             </span>
             <span className="text-xs font-medium">System Online</span>
           </div>
-          <button className="relative h-9 w-9 grid place-items-center rounded-xl glass hover:bg-white/10 transition">
+          <button className="relative h-9 w-9 grid place-items-center rounded-xl glass hover:bg-foreground/5 transition">
             <Bell className="h-4 w-4" />
-            <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-[var(--neon-pink)]" />
+            <span className="absolute top-1.5 right-1.5 h-2 w-2 rounded-full bg-[var(--neon-purple)]" />
           </button>
-          <button className="h-9 w-9 grid place-items-center rounded-xl glass hover:bg-white/10 transition">
+          <button className="h-9 w-9 grid place-items-center rounded-xl glass hover:bg-foreground/5 transition">
             <Settings className="h-4 w-4" />
           </button>
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-[var(--neon-pink)] to-[var(--neon-purple)] grid place-items-center text-xs font-bold">AU</div>
+          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-[var(--neon-purple)] to-[var(--neon-blue)] grid place-items-center text-xs font-bold text-white">AU</div>
         </div>
       </div>
     </header>

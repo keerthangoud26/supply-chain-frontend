@@ -138,7 +138,7 @@ export function DashboardContent() {
           <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_20%_0%,var(--neon-purple),transparent_45%),radial-gradient(circle_at_90%_100%,var(--neon-cyan),transparent_45%)]" />
           <div className="relative grid grid-cols-[minmax(0,1fr)_auto] gap-4 items-center">
             <div className="min-w-0">
-              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-[11px] text-[var(--neon-cyan)]">
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-foreground/5 border border-border text-[11px] text-[var(--neon-cyan)]">
                 <Sparkles className="h-3 w-3" /> AI Insights · Updated 12s ago
               </div>
               <h2 className="mt-3 text-xl md:text-2xl font-bold leading-tight">
@@ -180,9 +180,9 @@ export function DashboardContent() {
                     <stop offset="100%" stopColor="var(--neon-purple)" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                <XAxis dataKey="t" tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 10 }} axisLine={false} tickLine={false} />
-                <YAxis tick={{ fill: "rgba(255,255,255,0.4)", fontSize: 10 }} axisLine={false} tickLine={false} width={28} />
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(20,30,50,0.08)" />
+                <XAxis dataKey="t" tick={{ fill: "rgba(20,30,50,0.55)", fontSize: 10 }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fill: "rgba(20,30,50,0.55)", fontSize: 10 }} axisLine={false} tickLine={false} width={28} />
                 <Tooltip content={<ChartTooltip />} />
                 <Area type="monotone" dataKey="v" stroke="var(--neon-purple)" strokeWidth={2} fill="url(#rev)" />
               </AreaChart>
@@ -202,10 +202,10 @@ export function DashboardContent() {
                       <stop offset="100%" stopColor="var(--neon-blue)" />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
-                  <XAxis dataKey="sku" tick={{ fill: "rgba(255,255,255,0.5)", fontSize: 11 }} axisLine={false} tickLine={false} />
-                  <YAxis tick={{ fill: "rgba(255,255,255,0.5)", fontSize: 11 }} axisLine={false} tickLine={false} />
-                  <Tooltip cursor={{ fill: "rgba(255,255,255,0.04)" }} content={<ChartTooltip />} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(20,30,50,0.08)" vertical={false} />
+                  <XAxis dataKey="sku" tick={{ fill: "rgba(20,30,50,0.6)", fontSize: 11 }} axisLine={false} tickLine={false} />
+                  <YAxis tick={{ fill: "rgba(20,30,50,0.6)", fontSize: 11 }} axisLine={false} tickLine={false} />
+                  <Tooltip cursor={{ fill: "rgba(20,30,50,0.05)" }} content={<ChartTooltip />} />
                   <Bar dataKey="units" fill="url(#barP)" radius={[8, 8, 4, 4]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -222,10 +222,10 @@ export function DashboardContent() {
                       <stop offset="100%" stopColor="var(--neon-blue)" />
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" horizontal={false} />
-                  <XAxis type="number" tick={{ fill: "rgba(255,255,255,0.5)", fontSize: 11 }} axisLine={false} tickLine={false} />
-                  <YAxis type="category" dataKey="supplier" tick={{ fill: "rgba(255,255,255,0.7)", fontSize: 11 }} axisLine={false} tickLine={false} width={80} />
-                  <Tooltip cursor={{ fill: "rgba(255,255,255,0.04)" }} content={<ChartTooltip />} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(20,30,50,0.08)" horizontal={false} />
+                  <XAxis type="number" tick={{ fill: "rgba(20,30,50,0.6)", fontSize: 11 }} axisLine={false} tickLine={false} />
+                  <YAxis type="category" dataKey="supplier" tick={{ fill: "rgba(20,30,50,0.75)", fontSize: 11 }} axisLine={false} tickLine={false} width={80} />
+                  <Tooltip cursor={{ fill: "rgba(20,30,50,0.05)" }} content={<ChartTooltip />} />
                   <Bar dataKey="rate" fill="url(#barC)" radius={[4, 8, 8, 4]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -268,9 +268,9 @@ export function DashboardContent() {
             accent="red"
             action={<span className="text-[10px] uppercase tracking-widest px-2 py-1 rounded-full bg-[var(--danger)]/15 text-[var(--danger)] font-semibold">Low Stock Alert</span>}
           >
-            <div className="overflow-hidden rounded-xl border border-white/5">
+            <div className="overflow-hidden rounded-xl border border-border">
               <table className="w-full text-sm">
-                <thead className="bg-white/[0.03] text-[11px] uppercase tracking-wider text-muted-foreground">
+                <thead className="bg-foreground/5 text-[11px] uppercase tracking-wider text-muted-foreground">
                   <tr>
                     <th className="text-left px-4 py-2.5">SKU</th>
                     <th className="text-left px-4 py-2.5">Stock</th>
@@ -312,8 +312,8 @@ export function DashboardContent() {
             className="xl:col-span-2"
             action={
               <div className="flex items-center gap-2">
-                <span className="px-2 py-1 rounded-md bg-white/5 text-[11px] font-mono">MAE 2.231</span>
-                <span className="px-2 py-1 rounded-md bg-white/5 text-[11px] font-mono">R² −0.050</span>
+                <span className="px-2 py-1 rounded-md bg-foreground/5 text-[11px] font-mono">MAE 2.231</span>
+                <span className="px-2 py-1 rounded-md bg-foreground/5 text-[11px] font-mono">R² −0.050</span>
               </div>
             }
           >
@@ -343,7 +343,7 @@ export function DashboardContent() {
                       <div className="flex justify-between text-xs mb-1">
                         <span>{f.name}</span><span className="font-mono text-muted-foreground">{f.value}%</span>
                       </div>
-                      <div className="h-2 rounded-full bg-white/5 overflow-hidden">
+                      <div className="h-2 rounded-full bg-foreground/5 overflow-hidden">
                         <div
                           className="h-full rounded-full bg-gradient-to-r from-[var(--neon-purple)] via-[var(--neon-blue)] to-[var(--neon-cyan)]"
                           style={{ width: `${(f.value / 29) * 100}%` }}
@@ -408,8 +408,8 @@ export function DashboardContent() {
               </div>
             }
           >
-            <div className="rounded-xl border border-white/5 bg-black/30 font-mono text-xs overflow-hidden">
-              <div className="flex items-center gap-2 px-4 py-2 border-b border-white/5 text-muted-foreground">
+            <div className="rounded-xl border border-border bg-black/30 font-mono text-xs overflow-hidden">
+              <div className="flex items-center gap-2 px-4 py-2 border-b border-border text-muted-foreground">
                 <span className="h-2 w-2 rounded-full bg-[var(--danger)]" />
                 <span className="h-2 w-2 rounded-full bg-[var(--warning)]" />
                 <span className="h-2 w-2 rounded-full bg-[var(--success)]" />
@@ -432,8 +432,8 @@ export function DashboardContent() {
               {systemStatus.map((s) => {
                 const Icon = s.icon;
                 return (
-                  <li key={s.name} className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-white/5 transition">
-                    <div className="h-9 w-9 rounded-lg bg-white/5 grid place-items-center">
+                  <li key={s.name} className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-foreground/5 transition">
+                    <div className="h-9 w-9 rounded-lg bg-foreground/5 grid place-items-center">
                       <Icon className="h-4 w-4 text-[var(--neon-cyan)]" />
                     </div>
                     <div className="min-w-0 flex-1">
@@ -466,8 +466,8 @@ export function DashboardContent() {
                 b.variant === "primary"
                   ? "bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-blue)] text-white glow-purple hover:brightness-110"
                   : b.variant === "accent"
-                    ? "bg-gradient-to-r from-[var(--neon-cyan)] to-[var(--neon-blue)] text-[#0B0F1A] glow-cyan hover:brightness-110"
-                    : "glass hover:bg-white/10 text-foreground";
+                    ? "bg-gradient-to-r from-[var(--neon-cyan)] to-[var(--neon-blue)] text-white glow-cyan hover:brightness-110"
+                    : "glass hover:bg-foreground/10 text-foreground";
               return (
                 <button key={b.label} className={base + " " + styles}>
                   <I className="h-4 w-4" /> {b.label}
