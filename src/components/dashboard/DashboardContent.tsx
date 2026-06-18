@@ -308,7 +308,7 @@ export function DashboardContent() {
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           <Panel
             title="Predictive Logistics Optimization Engine"
-            subtitle="Random Forest Regression Model · trained on 2.4M rows"
+            subtitle="Predicting shipment cost patterns across Indian enterprise logistics network."
             accent="purple"
             className="xl:col-span-2"
             action={
