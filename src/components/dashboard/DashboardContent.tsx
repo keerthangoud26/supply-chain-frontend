@@ -64,7 +64,7 @@ const systemStatus = [
   { name: "ML Prediction Engine", status: "Active", icon: Brain },
   { name: "Anomaly Detection Service", status: "Running", icon: ShieldAlert },
   { name: "Docker Containers", status: "Healthy", icon: Box },
-  { name: "API Layer", status: "Active", icon: Server },
+  { name: "Prediction API Gateway", status: "Active", icon: Server },
 ];
 
 const logSeed = [
@@ -149,7 +149,7 @@ export function DashboardContent() {
               </p>
             </div>
             <button className="shrink-0 hidden md:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-blue)] text-white text-sm font-semibold glow-purple hover:brightness-110 transition">
-              <Brain className="h-4 w-4" /> Run AI Briefing
+              <Brain className="h-4 w-4" /> Run Predictive Analysis
             </button>
           </div>
         </div>
@@ -157,17 +157,17 @@ export function DashboardContent() {
         {/* KPIs */}
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
           <KpiCard label="Total Revenue" value={12.4} decimals={1} prefix="$" suffix="M" trend={12.4} icon={DollarSign} accent="purple" />
-          <KpiCard label="Total Products" value={100} suffix=" SKUs" trend={5} icon={Package} accent="blue" />
+          <KpiCard label="Managed SKUs" value={100} suffix=" SKUs" trend={5} icon={Package} accent="blue" />
           <KpiCard label="Active Suppliers" value={5} trend={2} icon={Users} accent="cyan" />
           <KpiCard label="Avg Shipping Cost" value={5.54} decimals={2} prefix="$" trend={-3.2} icon={Truck} accent="pink" />
-          <KpiCard label="Inventory Health" value={94} suffix="%" trend={4} icon={Activity} accent="green" />
+          <KpiCard label="Inventory Stability Score" value={94} suffix="%" trend={4} icon={Activity} accent="green" />
           <KpiCard label="Shipment Risk Alerts" value={10} trend={3} trendLabel=" alerts" icon={AlertTriangle} accent="red" />
         </div>
 
         {/* Revenue trend strip */}
         <Panel
-          title="Revenue Flow · Last 24 Hours"
-          subtitle="Streaming aggregate from Kafka transaction topic"
+          title="Supply Chain Activity Stream"
+          subtitle="Real-time streaming events processed through Kafka pipeline."
           accent="purple"
           action={<div className="flex items-center gap-2 text-xs text-muted-foreground"><TrendingUp className="h-3.5 w-3.5 text-[var(--success)]" /> +12.4% WoW</div>}
         >
@@ -192,7 +192,7 @@ export function DashboardContent() {
 
         {/* Row 1: Top products + Supplier defect */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          <Panel title="Top Selling Products" subtitle="Units shipped · last 7 days" accent="purple">
+          <Panel title="Top Selling Products" subtitle="Highest performing SKUs across active supply network." accent="purple">
             <div className="h-[280px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={topProducts} margin={{ left: -10, right: 10, top: 10 }}>
@@ -212,7 +212,7 @@ export function DashboardContent() {
             </div>
           </Panel>
 
-          <Panel title="Supplier Defect Rate Analysis" subtitle="Lower is better · % units defective" accent="cyan">
+          <Panel title="Supplier Defect Rate Analysis" subtitle="Supplier quality performance and manufacturing defect analysis." accent="cyan">
             <div className="h-[280px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={supplierDefects} layout="vertical" margin={{ left: 20, right: 30 }}>
@@ -235,7 +235,7 @@ export function DashboardContent() {
 
         {/* Row 2: Donut + Low stock */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          <Panel title="Logistics Cost Analysis" subtitle="Average cost per shipment by mode" accent="pink">
+          <Panel title="Logistics Cost Analysis" subtitle="Transportation cost distribution across shipping modes." accent="pink">
             <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-4 items-center">
               <div className="h-[260px]">
                 <ResponsiveContainer width="100%" height="100%">
@@ -263,8 +263,8 @@ export function DashboardContent() {
           </Panel>
 
           <Panel
-            title="Low Inventory Risk"
-            subtitle="Predicted stockouts within 72h"
+            title="Inventory Risk Monitoring"
+            subtitle="AI detected critical stock shortage patterns."
             accent="red"
             action={<span className="text-[10px] uppercase tracking-widest px-2 py-1 rounded-full bg-[var(--danger)]/15 text-[var(--danger)] font-semibold">Low Stock Alert</span>}
           >
@@ -306,12 +306,16 @@ export function DashboardContent() {
         {/* AI Prediction + Anomaly */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           <Panel
-            title="AI Shipping Cost Prediction Engine"
-            subtitle="Random Forest Regression · trained on 2.4M rows"
+            title="Predictive Logistics Optimization Engine"
+            subtitle="Random Forest Regression Model · trained on 2.4M rows"
             accent="purple"
             className="xl:col-span-2"
             action={
               <div className="flex items-center gap-2">
+                <span className="inline-flex items-center gap-1.5 px-2 py-1 rounded-md bg-[var(--success)]/12 text-[var(--success)] text-[11px] font-semibold">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--success)] animate-pulse" />
+                  Inference Pipeline Active
+                </span>
                 <span className="px-2 py-1 rounded-md bg-foreground/5 text-[11px] font-mono">MAE 2.231</span>
                 <span className="px-2 py-1 rounded-md bg-foreground/5 text-[11px] font-mono">R² −0.050</span>
               </div>
@@ -323,7 +327,7 @@ export function DashboardContent() {
                   <div className="flex items-center gap-2 text-[11px] uppercase tracking-wider text-muted-foreground">
                     <Brain className="h-3.5 w-3.5 text-[var(--neon-purple)]" /> Model
                   </div>
-                  <div className="mt-2 text-base font-semibold">Random Forest</div>
+                  <div className="mt-2 text-base font-semibold">Random Forest Regression</div>
                   <div className="text-xs text-muted-foreground">200 estimators · depth 12</div>
                 </div>
                 <div className="glass rounded-xl p-4 w-full md:w-[220px]">
@@ -369,15 +373,15 @@ export function DashboardContent() {
               </div>
               <div>
                 <div className="text-3xl font-bold">10</div>
-                <div className="text-xs text-muted-foreground">anomalies detected · last 24h</div>
+                <div className="text-xs text-muted-foreground">Critical Logistics Deviations Detected · last 24h</div>
               </div>
             </div>
             <ul className="mt-5 space-y-2.5 text-sm">
               {[
-                "High-cost shipment SKU83 flagged",
-                "Suspicious route deviation detected",
-                "Carrier latency outlier · DHL EU-21",
-                "Manual review queued for 3 shipments",
+                "Abnormal shipping cost spike detected",
+                "Route deviation anomaly identified",
+                "Carrier performance irregularity detected",
+                "Manual review required for flagged shipments",
               ].map((t, i) => (
                 <li key={i} className="flex items-start gap-2.5">
                   <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--danger)] shrink-0" />
@@ -394,8 +398,8 @@ export function DashboardContent() {
         {/* Realtime + System status */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           <Panel
-            title="Real-Time Kafka Stream"
-            subtitle="Topic: nexus.shipments · partition 0–7"
+            title="Live Event Streaming Pipeline"
+            subtitle="Real-time logistics events processed by Kafka streaming engine."
             accent="cyan"
             className="xl:col-span-2"
             action={
@@ -413,7 +417,7 @@ export function DashboardContent() {
                 <span className="h-2 w-2 rounded-full bg-[var(--danger)]" />
                 <span className="h-2 w-2 rounded-full bg-[var(--warning)]" />
                 <span className="h-2 w-2 rounded-full bg-[var(--success)]" />
-                <span className="ml-2">nexus@stream:~$ tail -f shipments.log</span>
+                <span className="ml-2">supplysense@stream:~$ tail -f shipments.log</span>
               </div>
               <div className="p-4 space-y-1.5 max-h-[280px] overflow-y-auto">
                 {logs.map((l) => (
@@ -452,13 +456,13 @@ export function DashboardContent() {
         </div>
 
         {/* Reports */}
-        <Panel title="Reports & Exports" subtitle="Generate executive-ready intelligence reports" accent="purple">
+        <Panel title="Executive Intelligence Reports" subtitle="Generate board-ready intelligence reports and strategic exports." accent="purple">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
             {[
               { label: "Export CSV", icon: FileSpreadsheet, variant: "ghost" },
               { label: "Export PDF", icon: FileText, variant: "ghost" },
-              { label: "Generate Weekly Report", icon: Download, variant: "primary" },
-              { label: "Generate Executive Report", icon: Sparkles, variant: "accent" },
+              { label: "Generate Operational Summary", icon: Download, variant: "primary" },
+              { label: "Generate Strategic Report", icon: Sparkles, variant: "accent" },
             ].map((b) => {
               const I = b.icon;
               const base = "group flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold transition";
@@ -477,8 +481,13 @@ export function DashboardContent() {
           </div>
         </Panel>
 
-        <footer className="pt-2 pb-6 text-center text-[11px] text-muted-foreground">
-          Nexus Supply Chain AI · v2.4.1 · Powered by Kafka · PostgreSQL · ML Engine
+        <footer className="pt-4 pb-8 text-center">
+          <div className="text-[11px] text-muted-foreground/70 tracking-wide">
+            Built with Python · PostgreSQL · Kafka · Machine Learning · Docker · FastAPI
+          </div>
+          <div className="mt-1 text-[10px] text-muted-foreground/50 font-mono">
+            SupplySense AI · v2.4.1 · © 2026 Enterprise Intelligence Platform
+          </div>
         </footer>
       </div>
     </div>
