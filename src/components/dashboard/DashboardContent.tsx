@@ -29,10 +29,10 @@ const supplierDefects = [
 ];
 
 const logisticsCost = [
-  { mode: "Air",  cost: 6.01, color: "var(--neon-purple)" },
-  { mode: "Road", cost: 5.54, color: "var(--neon-blue)" },
-  { mode: "Rail", cost: 5.46, color: "var(--neon-cyan)" },
-  { mode: "Sea",  cost: 4.97, color: "var(--neon-pink)" },
+  { mode: "Air",  cost: 6010, color: "var(--neon-purple)" },
+  { mode: "Road", cost: 5540, color: "var(--neon-blue)" },
+  { mode: "Rail", cost: 5460, color: "var(--neon-cyan)" },
+  { mode: "Sea",  cost: 4970, color: "var(--neon-pink)" },
 ];
 
 const lowStock = [
