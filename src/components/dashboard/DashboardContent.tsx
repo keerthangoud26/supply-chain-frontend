@@ -143,10 +143,10 @@ export function DashboardContent() {
                 <Sparkles className="h-3 w-3" /> AI Insights · Updated 12s ago
               </div>
               <h2 className="mt-3 text-xl md:text-2xl font-bold leading-tight">
-                Global supply chain is operating at <span className="gradient-text">94% efficiency</span>.
+                Pan-India supply chain is operating at <span className="gradient-text">94% efficiency</span>.
               </h2>
               <p className="text-sm text-muted-foreground mt-1">
-                Predictive models forecast +3.1% revenue lift next week. 10 anomalous shipments require review.
+                Predictive models forecast +3.1% revenue lift next week across Tier-1 metros. 10 anomalous shipments require review.
               </p>
             </div>
             <button className="shrink-0 hidden md:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-blue)] text-white text-sm font-semibold glow-purple hover:brightness-110 transition">
