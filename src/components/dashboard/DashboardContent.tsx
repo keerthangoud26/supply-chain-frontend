@@ -256,7 +256,7 @@ export function DashboardContent() {
                   <div key={d.mode} className="flex items-center gap-3 min-w-[180px]">
                     <span className="h-2.5 w-2.5 rounded-full" style={{ background: d.color, boxShadow: `0 0 12px ${d.color}` }} />
                     <span className="text-sm flex-1">{d.mode}</span>
-                    <span className="font-mono text-sm">${d.cost.toFixed(2)}</span>
+                    <span className="font-mono text-sm">₹{d.cost.toLocaleString("en-IN")}</span>
                   </div>
                 ))}
               </div>
