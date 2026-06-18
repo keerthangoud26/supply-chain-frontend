@@ -400,7 +400,7 @@ export function DashboardContent() {
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           <Panel
             title="Live Event Streaming Pipeline"
-            subtitle="Real-time logistics events processed by Kafka streaming engine."
+            subtitle="Real-time Indian logistics events processed by Kafka streaming engine."
             accent="cyan"
             className="xl:col-span-2"
             action={
