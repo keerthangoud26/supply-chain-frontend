@@ -1,16 +1,19 @@
 import { Bell, Search, Settings, ChevronRight } from "lucide-react";
 
-export function Header({ title, breadcrumb }: { title: string; breadcrumb?: string }) {
+export function Header({ title, subtitle, breadcrumb }: { title: string; subtitle?: string; breadcrumb?: string }) {
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-card/70 backdrop-blur-2xl">
       <div className="flex items-center gap-4 px-4 md:px-8 h-16">
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
-            <span>Nexus</span>
+            <span>SupplySense</span>
             <ChevronRight className="h-3 w-3" />
             <span className="text-[var(--neon-blue)]">{breadcrumb ?? title}</span>
           </div>
-          <h1 className="text-lg md:text-xl font-bold truncate">{title}</h1>
+          <h1 className="text-lg md:text-xl font-bold truncate tracking-tight">{title}</h1>
+          {subtitle && (
+            <p className="text-[11px] text-muted-foreground truncate hidden md:block">{subtitle}</p>
+          )}
         </div>
 
         <div className="hidden md:flex relative w-[380px] max-w-[40vw]">
@@ -38,7 +41,7 @@ export function Header({ title, breadcrumb }: { title: string; breadcrumb?: stri
           <button className="h-9 w-9 grid place-items-center rounded-xl glass hover:bg-foreground/5 transition">
             <Settings className="h-4 w-4" />
           </button>
-          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-[var(--neon-purple)] to-[var(--neon-blue)] grid place-items-center text-xs font-bold text-white">AU</div>
+          <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-[var(--neon-purple)] to-[var(--neon-blue)] grid place-items-center text-xs font-bold text-white">KG</div>
         </div>
       </div>
     </header>
