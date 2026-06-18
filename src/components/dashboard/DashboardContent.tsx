@@ -379,9 +379,9 @@ export function DashboardContent() {
             </div>
             <ul className="mt-5 space-y-2.5 text-sm">
               {[
-                "Abnormal shipping cost spike detected",
-                "Route deviation anomaly identified",
-                "Carrier performance irregularity detected",
+                "Abnormal shipping cost spike detected on Hyderabad route",
+                "Route deviation anomaly identified in Mumbai warehouse dispatch",
+                "Carrier performance irregularity detected in Delhi transport lane",
                 "Manual review required for flagged shipments",
               ].map((t, i) => (
                 <li key={i} className="flex items-start gap-2.5">
