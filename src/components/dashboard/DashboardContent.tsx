@@ -68,14 +68,15 @@ const systemStatus = [
 ];
 
 const logSeed = [
-  "Shipment SKU10 received at hub LA-04",
-  "Shipment SKU94 processed by carrier DHL",
-  "Inventory updated for SKU37 → +320",
-  "Supplier S-3 update received: defect rate 2.46%",
-  "Route reoptimization complete (saved 4.2%)",
-  "Anomaly score elevated for SKU83 shipment",
-  "Kafka partition rebalanced (consumer-group nexus-1)",
-  "Predictive ETA refreshed for 1,284 shipments",
+  "Shipment SKU10 received at Hyderabad hub",
+  "Inventory updated at Bangalore warehouse → +320",
+  "Supplier update received from Pune facility (defect 2.46%)",
+  "Route optimization completed for Chennai dispatch (saved 4.2%)",
+  "Shipment anomaly detected in Mumbai logistics lane",
+  "Delhivery carrier handoff confirmed for SKU94",
+  "Kafka partition rebalanced (consumer-group bharat-1)",
+  "Predictive ETA refreshed for 1,284 shipments across Tier-1 metros",
+  "Cold-chain breach flagged at Kolkata distribution centre",
 ];
 
 function ChartTooltip({ active, payload, label }: any) {
