@@ -5,14 +5,17 @@ import { DashboardContent } from "@/components/dashboard/DashboardContent";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Nexus Supply Chain AI — Enterprise Intelligence Platform" },
-      { name: "description", content: "Real-time supply chain analytics, predictive ML, and anomaly detection for enterprise retail and logistics." },
-      { property: "og:title", content: "Nexus Supply Chain AI" },
-      { property: "og:description", content: "Enterprise AI dashboard for global supply chain intelligence." },
+      { title: "SupplySense AI — Enterprise Intelligence Platform" },
+      { name: "description", content: "AI-powered predictive logistics and enterprise supply intelligence platform." },
+      { property: "og:title", content: "SupplySense AI" },
+      { property: "og:description", content: "AI-powered predictive logistics and enterprise supply intelligence platform." },
     ],
   }),
   component: () => (
-    <AppShell title="Dashboard Overview">
+    <AppShell
+      title="Supply Chain Control Tower"
+      subtitle="AI-powered predictive logistics and enterprise supply intelligence platform."
+    >
       <DashboardContent />
     </AppShell>
   ),

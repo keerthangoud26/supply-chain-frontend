@@ -31,8 +31,8 @@ export function Sidebar() {
             <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-[var(--neon-purple)]/30 to-[var(--neon-cyan)]/30 blur-md -z-10" />
           </div>
           <div className="min-w-0">
-            <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground">Nexus</div>
-            <div className="text-sm font-bold leading-tight gradient-text">SUPPLY CHAIN AI</div>
+            <div className="text-sm font-bold leading-tight gradient-text">SupplySense AI</div>
+            <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground mt-0.5">Enterprise Intelligence Platform</div>
           </div>
         </div>
       </div>
@@ -66,12 +66,12 @@ export function Sidebar() {
       <div className="p-3 border-t border-border">
         <div className="glass rounded-xl p-3 flex items-center gap-3">
           <div className="relative shrink-0">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[var(--neon-purple)] to-[var(--neon-blue)] grid place-items-center text-sm font-bold text-white">AU</div>
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-[var(--neon-purple)] to-[var(--neon-blue)] grid place-items-center text-sm font-bold text-white">KG</div>
             <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-[var(--success)] ring-2 ring-card pulse-dot" />
           </div>
           <div className="min-w-0">
-            <div className="text-sm font-semibold truncate">Admin User</div>
-            <div className="text-[11px] text-muted-foreground truncate">Supply Chain Director</div>
+            <div className="text-sm font-semibold truncate">Keerthan G</div>
+            <div className="text-[11px] text-muted-foreground truncate">AI Systems Engineer</div>
           </div>
         </div>
       </div>
