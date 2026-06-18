@@ -157,10 +157,10 @@ export function DashboardContent() {
 
         {/* KPIs */}
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
-          <KpiCard label="Total Revenue" value={12.4} decimals={1} prefix="$" suffix="M" trend={12.4} icon={DollarSign} accent="purple" />
+          <KpiCard label="Total Revenue" value={12.4} decimals={1} prefix="₹" suffix=" Cr" trend={12.4} icon={DollarSign} accent="purple" />
           <KpiCard label="Managed SKUs" value={100} suffix=" SKUs" trend={5} icon={Package} accent="blue" />
           <KpiCard label="Active Suppliers" value={5} trend={2} icon={Users} accent="cyan" />
-          <KpiCard label="Avg Shipping Cost" value={5.54} decimals={2} prefix="$" trend={-3.2} icon={Truck} accent="pink" />
+          <KpiCard label="Avg Shipping Cost" value={5540} prefix="₹" trend={-3.2} icon={Truck} accent="pink" />
           <KpiCard label="Inventory Stability Score" value={94} suffix="%" trend={4} icon={Activity} accent="green" />
           <KpiCard label="Shipment Risk Alerts" value={10} trend={3} trendLabel=" alerts" icon={AlertTriangle} accent="red" />
         </div>
