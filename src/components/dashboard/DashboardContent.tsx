@@ -29,10 +29,10 @@ const supplierDefects = [
 ];
 
 const logisticsCost = [
-  { mode: "Air",  cost: 6.01, color: "var(--neon-purple)" },
-  { mode: "Road", cost: 5.54, color: "var(--neon-blue)" },
-  { mode: "Rail", cost: 5.46, color: "var(--neon-cyan)" },
-  { mode: "Sea",  cost: 4.97, color: "var(--neon-pink)" },
+  { mode: "Air",  cost: 6010, color: "var(--neon-purple)" },
+  { mode: "Road", cost: 5540, color: "var(--neon-blue)" },
+  { mode: "Rail", cost: 5460, color: "var(--neon-cyan)" },
+  { mode: "Sea",  cost: 4970, color: "var(--neon-pink)" },
 ];
 
 const lowStock = [
@@ -68,14 +68,15 @@ const systemStatus = [
 ];
 
 const logSeed = [
-  "Shipment SKU10 received at hub LA-04",
-  "Shipment SKU94 processed by carrier DHL",
-  "Inventory updated for SKU37 → +320",
-  "Supplier S-3 update received: defect rate 2.46%",
-  "Route reoptimization complete (saved 4.2%)",
-  "Anomaly score elevated for SKU83 shipment",
-  "Kafka partition rebalanced (consumer-group nexus-1)",
-  "Predictive ETA refreshed for 1,284 shipments",
+  "Shipment SKU10 received at Hyderabad hub",
+  "Inventory updated at Bangalore warehouse → +320",
+  "Supplier update received from Pune facility (defect 2.46%)",
+  "Route optimization completed for Chennai dispatch (saved 4.2%)",
+  "Shipment anomaly detected in Mumbai logistics lane",
+  "Delhivery carrier handoff confirmed for SKU94",
+  "Kafka partition rebalanced (consumer-group bharat-1)",
+  "Predictive ETA refreshed for 1,284 shipments across Tier-1 metros",
+  "Cold-chain breach flagged at Kolkata distribution centre",
 ];
 
 function ChartTooltip({ active, payload, label }: any) {
@@ -83,13 +84,16 @@ function ChartTooltip({ active, payload, label }: any) {
   return (
     <div className="glass-strong rounded-lg px-3 py-2 text-xs">
       {label !== undefined && <div className="font-semibold mb-1">{label}</div>}
-      {payload.map((p: any, i: number) => (
-        <div key={i} className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full" style={{ background: p.color || p.fill }} />
-          <span className="text-muted-foreground">{p.name}:</span>
-          <span className="font-mono">{typeof p.value === "number" ? p.value.toLocaleString(undefined, { maximumFractionDigits: 2 }) : p.value}</span>
-        </div>
-      ))}
+      {payload.map((p: any, i: number) => {
+        const isCost = p.name === "cost" || p.dataKey === "cost";
+        return (
+          <div key={i} className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full" style={{ background: p.color || p.fill }} />
+            <span className="text-muted-foreground">{p.name}:</span>
+            <span className="font-mono">{isCost ? "₹" : ""}{typeof p.value === "number" ? p.value.toLocaleString("en-IN", { maximumFractionDigits: 2 }) : p.value}</span>
+          </div>
+        );
+      })}
     </div>
   );
 }
@@ -142,10 +146,10 @@ export function DashboardContent() {
                 <Sparkles className="h-3 w-3" /> AI Insights · Updated 12s ago
               </div>
               <h2 className="mt-3 text-xl md:text-2xl font-bold leading-tight">
-                Global supply chain is operating at <span className="gradient-text">94% efficiency</span>.
+                Pan-India supply chain is operating at <span className="gradient-text">94% efficiency</span>.
               </h2>
               <p className="text-sm text-muted-foreground mt-1">
-                Predictive models forecast +3.1% revenue lift next week. 10 anomalous shipments require review.
+                Predictive models forecast +3.1% revenue lift next week across Tier-1 metros. 10 anomalous shipments require review.
               </p>
             </div>
             <button className="shrink-0 hidden md:inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-blue)] text-white text-sm font-semibold glow-purple hover:brightness-110 transition">
@@ -156,10 +160,10 @@ export function DashboardContent() {
 
         {/* KPIs */}
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
-          <KpiCard label="Total Revenue" value={12.4} decimals={1} prefix="$" suffix="M" trend={12.4} icon={DollarSign} accent="purple" />
+          <KpiCard label="Total Revenue" value={12.4} decimals={1} prefix="₹" suffix=" Cr" trend={12.4} icon={DollarSign} accent="purple" />
           <KpiCard label="Managed SKUs" value={100} suffix=" SKUs" trend={5} icon={Package} accent="blue" />
           <KpiCard label="Active Suppliers" value={5} trend={2} icon={Users} accent="cyan" />
-          <KpiCard label="Avg Shipping Cost" value={5.54} decimals={2} prefix="$" trend={-3.2} icon={Truck} accent="pink" />
+          <KpiCard label="Avg Shipping Cost" value={5540} prefix="₹" trend={-3.2} icon={Truck} accent="pink" />
           <KpiCard label="Inventory Stability Score" value={94} suffix="%" trend={4} icon={Activity} accent="green" />
           <KpiCard label="Shipment Risk Alerts" value={10} trend={3} trendLabel=" alerts" icon={AlertTriangle} accent="red" />
         </div>
@@ -255,7 +259,7 @@ export function DashboardContent() {
                   <div key={d.mode} className="flex items-center gap-3 min-w-[180px]">
                     <span className="h-2.5 w-2.5 rounded-full" style={{ background: d.color, boxShadow: `0 0 12px ${d.color}` }} />
                     <span className="text-sm flex-1">{d.mode}</span>
-                    <span className="font-mono text-sm">${d.cost.toFixed(2)}</span>
+                    <span className="font-mono text-sm">₹{d.cost.toLocaleString("en-IN")}</span>
                   </div>
                 ))}
               </div>
@@ -307,7 +311,7 @@ export function DashboardContent() {
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           <Panel
             title="Predictive Logistics Optimization Engine"
-            subtitle="Random Forest Regression Model · trained on 2.4M rows"
+            subtitle="Predicting shipment cost patterns across Indian enterprise logistics network."
             accent="purple"
             className="xl:col-span-2"
             action={
@@ -378,9 +382,9 @@ export function DashboardContent() {
             </div>
             <ul className="mt-5 space-y-2.5 text-sm">
               {[
-                "Abnormal shipping cost spike detected",
-                "Route deviation anomaly identified",
-                "Carrier performance irregularity detected",
+                "Abnormal shipping cost spike detected on Hyderabad route",
+                "Route deviation anomaly identified in Mumbai warehouse dispatch",
+                "Carrier performance irregularity detected in Delhi transport lane",
                 "Manual review required for flagged shipments",
               ].map((t, i) => (
                 <li key={i} className="flex items-start gap-2.5">
@@ -399,7 +403,7 @@ export function DashboardContent() {
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
           <Panel
             title="Live Event Streaming Pipeline"
-            subtitle="Real-time logistics events processed by Kafka streaming engine."
+            subtitle="Real-time Indian logistics events processed by Kafka streaming engine."
             accent="cyan"
             className="xl:col-span-2"
             action={
