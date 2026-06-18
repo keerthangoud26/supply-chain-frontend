@@ -84,13 +84,16 @@ function ChartTooltip({ active, payload, label }: any) {
   return (
     <div className="glass-strong rounded-lg px-3 py-2 text-xs">
       {label !== undefined && <div className="font-semibold mb-1">{label}</div>}
-      {payload.map((p: any, i: number) => (
-        <div key={i} className="flex items-center gap-2">
-          <span className="h-2 w-2 rounded-full" style={{ background: p.color || p.fill }} />
-          <span className="text-muted-foreground">{p.name}:</span>
-          <span className="font-mono">{typeof p.value === "number" ? p.value.toLocaleString(undefined, { maximumFractionDigits: 2 }) : p.value}</span>
-        </div>
-      ))}
+      {payload.map((p: any, i: number) => {
+        const isCost = p.name === "cost" || p.dataKey === "cost";
+        return (
+          <div key={i} className="flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full" style={{ background: p.color || p.fill }} />
+            <span className="text-muted-foreground">{p.name}:</span>
+            <span className="font-mono">{isCost ? "₹" : ""}{typeof p.value === "number" ? p.value.toLocaleString("en-IN", { maximumFractionDigits: 2 }) : p.value}</span>
+          </div>
+        );
+      })}
     </div>
   );
 }
