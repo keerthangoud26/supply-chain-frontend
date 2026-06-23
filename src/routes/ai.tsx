@@ -1,18 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BrainCircuit } from "lucide-react";
 import { AppShell } from "@/components/dashboard/AppShell";
-import { PageStub } from "@/components/dashboard/PageStub";
+import { AIPredictionPage } from "@/components/dashboard/AIPredictionPage";
 
 export const Route = createFileRoute("/ai")({
   head: () => ({
     meta: [
-      { title: "AI Prediction Engine — Nexus Supply Chain AI" },
-      { name: "description", content: "Random Forest cost predictions, demand forecasting and model performance telemetry." },
+      { title: "AI Prediction Engine — SupplySense AI" },
+      {
+        name: "description",
+        content: "Machine learning based revenue forecasting engine",
+      },
     ],
   }),
+
   component: () => (
     <AppShell title="AI Prediction Engine">
-      <PageStub title="AI Prediction Engine" subtitle="Random Forest cost predictions, demand forecasting and model performance telemetry." icon={BrainCircuit} accent="purple" />
+      <AIPredictionPage />
     </AppShell>
   ),
 });

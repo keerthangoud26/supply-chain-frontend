@@ -41,7 +41,7 @@ export function KpiCard({
       <div className="relative flex items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="text-[11px] uppercase tracking-[0.18em] text-muted-foreground">{label}</div>
-          <div className="mt-3 text-2xl md:text-3xl font-bold tracking-tight">
+          <div className="mt-3 text-xl md:text-2xl font-bold tracking-tight">
             {prefix}{n.toLocaleString(undefined, { maximumFractionDigits: decimals, minimumFractionDigits: decimals })}{suffix}
           </div>
           <div className={cn(

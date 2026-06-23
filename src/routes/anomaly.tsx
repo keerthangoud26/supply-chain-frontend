@@ -1,18 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ShieldAlert } from "lucide-react";
 import { AppShell } from "@/components/dashboard/AppShell";
-import { PageStub } from "@/components/dashboard/PageStub";
+import { AnomalyPage } from "@/components/dashboard/AnomalyPage";
 
 export const Route = createFileRoute("/anomaly")({
   head: () => ({
     meta: [
-      { title: "Anomaly Detection — Nexus Supply Chain AI" },
-      { name: "description", content: "Isolation Forest flagged shipments and unusual supply chain patterns." },
+      { title: "Anomaly Detection — SupplySense AI" },
+      {
+        name: "description",
+        content: "AI-powered anomaly detection and supply chain alerts",
+      },
     ],
   }),
+
   component: () => (
     <AppShell title="Anomaly Detection">
-      <PageStub title="Anomaly Detection" subtitle="Isolation Forest flagged shipments and unusual supply chain patterns." icon={ShieldAlert} accent="red" />
+      <AnomalyPage />
     </AppShell>
   ),
 });

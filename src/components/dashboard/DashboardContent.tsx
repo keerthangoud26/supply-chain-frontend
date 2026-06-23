@@ -7,41 +7,14 @@ import {
   DollarSign, Package, Users, Truck, Activity, AlertTriangle, Brain, ShieldAlert,
   Radio, Database, Server, Box, Cpu, Wifi, FileSpreadsheet, FileText,
   TrendingUp, Sparkles, Download, ChevronDown,
+  IndianRupee,
 } from "lucide-react";
 import { Panel } from "./Panel";
 
-const topProducts = [
-  { sku: "SKU10", units: 996 },
-  { sku: "SKU94", units: 987 },
-  { sku: "SKU9",  units: 980 },
-  { sku: "SKU37", units: 963 },
-  { sku: "SKU36", units: 963 },
-  { sku: "SKU72", units: 941 },
-  { sku: "SKU22", units: 920 },
-];
 
-const supplierDefects = [
-  { supplier: "Supplier 5", rate: 2.66 },
-  { supplier: "Supplier 3", rate: 2.46 },
-  { supplier: "Supplier 2", rate: 2.36 },
-  { supplier: "Supplier 4", rate: 2.33 },
-  { supplier: "Supplier 1", rate: 1.80 },
-];
 
-const logisticsCost = [
-  { mode: "Air",  cost: 6010, color: "var(--neon-purple)" },
-  { mode: "Road", cost: 5540, color: "var(--neon-blue)" },
-  { mode: "Rail", cost: 5460, color: "var(--neon-cyan)" },
-  { mode: "Sea",  cost: 4970, color: "var(--neon-pink)" },
-];
 
-const lowStock = [
-  { sku: "SKU14", stock: 4,  order: 250, critical: true },
-  { sku: "SKU52", stock: 9,  order: 180, critical: true },
-  { sku: "SKU07", stock: 12, order: 220, critical: false },
-  { sku: "SKU83", stock: 6,  order: 300, critical: true },
-  { sku: "SKU41", stock: 18, order: 150, critical: false },
-];
+
 
 const featureImportance = [
   { name: "Price", value: 29 },
@@ -67,17 +40,6 @@ const systemStatus = [
   { name: "Prediction API Gateway", status: "Active", icon: Server },
 ];
 
-const logSeed = [
-  "Shipment SKU10 received at Hyderabad hub",
-  "Inventory updated at Bangalore warehouse → +320",
-  "Supplier update received from Pune facility (defect 2.46%)",
-  "Route optimization completed for Chennai dispatch (saved 4.2%)",
-  "Shipment anomaly detected in Mumbai logistics lane",
-  "Delhivery carrier handoff confirmed for SKU94",
-  "Kafka partition rebalanced (consumer-group bharat-1)",
-  "Predictive ETA refreshed for 1,284 shipments across Tier-1 metros",
-  "Cold-chain breach flagged at Kolkata distribution centre",
-];
 
 function ChartTooltip({ active, payload, label }: any) {
   if (!active || !payload?.length) return null;
@@ -98,35 +60,145 @@ function ChartTooltip({ active, payload, label }: any) {
   );
 }
 
-function useLogStream() {
-  const [logs, setLogs] = useState<{ time: string; msg: string; id: number }[]>([]);
-  const idRef = useRef(0);
-  useEffect(() => {
-    const seed = logSeed.slice(0, 5).map((msg) => ({
-      time: new Date(Date.now() - Math.random() * 60000).toLocaleTimeString("en-GB"),
-      msg, id: idRef.current++,
-    }));
-    setLogs(seed);
-    const i = setInterval(() => {
-      setLogs((prev) => {
-        const next = [{
-          time: new Date().toLocaleTimeString("en-GB"),
-          msg: logSeed[Math.floor(Math.random() * logSeed.length)],
-          id: idRef.current++,
-        }, ...prev].slice(0, 9);
-        return next;
-      });
-    }, 2200);
-    return () => clearInterval(i);
-  }, []);
-  return logs;
-}
+
 
 import { KpiCard } from "./KpiCard";
 
 export function DashboardContent() {
-  const logs = useLogStream();
+ 
+  const [revenue, setRevenue] = useState(0);
+  const [products, setProducts] = useState(0);
+  const [suppliers, setSuppliers] = useState(0);
+  const [shippingCost, setShippingCost] = useState(0);
+  const [inventoryScore, setInventoryScore] = useState(0);
+  const [alerts, setAlerts] = useState(0);
+  const [topProducts, setTopProducts] = useState([]);
+  const [supplierDefects, setSupplierDefects] = useState<any[]>([]);
+  const [logisticsCost, setLogisticsCost] = useState<any[]>([]);
+  const [lowStock, setLowStock] = useState<any[]>([]);
+  const [anomalies, setAnomalies] = useState<any[]>([]);
+  const [logs, setLogs] = useState<any[]>([]);
+  
 
+  const fetchDashboardData = () => {
+  fetch("https://supply-chain-intelligence-system.onrender.com/revenue")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Revenue:", data);
+      setRevenue(data.revenue);
+    })
+    .catch((err) => console.log("Revenue error:", err));
+
+  fetch("https://supply-chain-intelligence-system.onrender.com/products")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Products:", data);
+      setProducts(data.products);
+    })
+    .catch((err) => console.log("Products error:", err));
+
+  fetch("https://supply-chain-intelligence-system.onrender.com/supplier-defects")
+    .then((res) => res.json())
+    .then((data) => {
+      const formatted = data.map((item: any) => ({
+        supplier: item.supplier_name,
+        rate: item.defect_rate
+      }));
+      setSupplierDefects(formatted);
+    });
+
+  fetch("https://supply-chain-intelligence-system.onrender.com/shipping-cost")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Shipping Cost:", data);
+      setShippingCost(data.avg_cost);
+    })
+    .catch((err) => console.log("Shipping Cost error:", err));
+
+  fetch("https://supply-chain-intelligence-system.onrender.com/logistics-cost")
+    .then((res) => res.json())
+    .then((data) => {
+      const colors = [
+        "var(--neon-purple)",
+        "var(--neon-blue)",
+        "var(--neon-cyan)",
+        "var(--neon-pink)"
+      ];
+
+      const formatted = data.map((item: any, index: number) => ({
+        mode: item.transportation_mode,
+        cost: item.avg_cost,
+        color: colors[index % colors.length]
+      }));
+
+      setLogisticsCost(formatted);
+    })
+    .catch((err) => console.log("Logistics error:", err));
+
+  fetch("https://supply-chain-intelligence-system.onrender.com/inventory-score")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Inventory Score:", data);
+      setInventoryScore(data.score);
+    })
+    .catch((err) => console.log("Inventory Score error:", err));
+
+  fetch("https://supply-chain-intelligence-system.onrender.com/top-products")
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("Top Products:", data);
+      const formatted = data.map((item: any) => ({
+        sku: item.product_type,
+        units: item.total_sales,
+      }));
+      setTopProducts(formatted);
+    })
+    .catch((err) => console.log("Top Products error:", err));
+
+  fetch("https://supply-chain-intelligence-system.onrender.com/low-stock")
+    .then((res) => res.json())
+    .then((data) => {
+      const formatted = data.map((item: any) => ({
+        sku: item.sku,
+        stock: item.stock_level,
+        order: Math.floor(Math.random() * 300) + 100,
+        critical: item.stock_level < 5
+      }));
+
+      setLowStock(formatted);
+    })
+    .catch((err) => console.log("Low Stock error:", err));
+
+  fetch("https://supply-chain-intelligence-system.onrender.com/anomalies")
+    .then((res) => res.json())
+    .then((data) => {
+      setAnomalies(data);
+    })
+    .catch((err) => console.log("Anomaly error:", err));
+
+  fetch("https://supply-chain-intelligence-system.onrender.com/activity-logs")
+    .then((res) => res.json())
+    .then((data) => {
+      const formatted = data.map((item: any, index: number) => ({
+        id: index,
+        time: new Date().toLocaleTimeString("en-GB"),
+        msg: item.message
+      }));
+
+      setLogs(formatted);
+    })
+    .catch((err) => console.log("Logs error:", err));
+};
+
+useEffect(() => {
+  fetchDashboardData();
+
+  const interval = setInterval(() => {
+    fetchDashboardData();
+  }, 5000);
+
+  return () => clearInterval(interval);
+}, []);
   return (
     <div className="relative">
       {/* Floating background orbs */}
@@ -160,12 +232,63 @@ export function DashboardContent() {
 
         {/* KPIs */}
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
-          <KpiCard label="Total Revenue" value={12.4} decimals={1} prefix="₹" suffix=" Cr" trend={12.4} icon={DollarSign} accent="purple" />
-          <KpiCard label="Managed SKUs" value={100} suffix=" SKUs" trend={5} icon={Package} accent="blue" />
-          <KpiCard label="Active Suppliers" value={5} trend={2} icon={Users} accent="cyan" />
-          <KpiCard label="Avg Shipping Cost" value={5540} prefix="₹" trend={-3.2} icon={Truck} accent="pink" />
-          <KpiCard label="Inventory Stability Score" value={94} suffix="%" trend={4} icon={Activity} accent="green" />
-          <KpiCard label="Shipment Risk Alerts" value={10} trend={3} trendLabel=" alerts" icon={AlertTriangle} accent="red" />
+
+          <KpiCard
+            label="Total Revenue"
+            value={revenue}
+            decimals={0}
+            prefix="₹"
+            trend={12.4}
+            icon={IndianRupee}
+            accent="purple"
+          />
+
+          <KpiCard
+            label="Managed SKUs"
+            value={products}
+            suffix=" SKUs"
+            trend={5}
+            icon={Package}
+            accent="blue"
+          />
+
+          <KpiCard
+            label="Active Suppliers"
+            value={suppliers}
+            trend={2}
+            icon={Users}
+            accent="cyan"
+          />
+
+          <KpiCard
+            label="Avg Shipping Cost"
+            value={shippingCost}
+            decimals={0}
+            prefix="₹"
+            trend={-3.2}
+            icon={Truck}
+            accent="pink"
+          />
+
+          <KpiCard
+            label="Inventory Stability Score"
+            value={inventoryScore}
+            suffix="%"
+            decimals={0}
+            trend={4}
+            icon={Activity}
+            accent="green"
+          />
+
+          <KpiCard
+            label="Shipment Risk Alerts"
+            value={alerts}
+            trend={3}
+            trendLabel=" alerts"
+            icon={AlertTriangle}
+            accent="red"
+          />
+
         </div>
 
         {/* Revenue trend strip */}
@@ -380,22 +503,25 @@ export function DashboardContent() {
                 <div className="text-xs text-muted-foreground">Critical Logistics Deviations Detected · last 24h</div>
               </div>
             </div>
-            <ul className="mt-5 space-y-2.5 text-sm">
-              {[
-                "Abnormal shipping cost spike detected on Hyderabad route",
-                "Route deviation anomaly identified in Mumbai warehouse dispatch",
-                "Carrier performance irregularity detected in Delhi transport lane",
-                "Manual review required for flagged shipments",
-              ].map((t, i) => (
-                <li key={i} className="flex items-start gap-2.5">
-                  <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--danger)] shrink-0" />
-                  <span className="text-muted-foreground">{t}</span>
-                </li>
-              ))}
-            </ul>
-            <button className="mt-5 w-full px-4 py-2.5 rounded-xl bg-[var(--danger)]/15 hover:bg-[var(--danger)]/25 border border-[var(--danger)]/30 text-[var(--danger)] text-sm font-semibold transition">
-              Review Anomalies
-            </button>
+          <div className="text-3xl font-bold">{anomalies.length}</div>
+          <div className="text-xs text-muted-foreground">
+            Critical Logistics Deviations Detected · last 24h
+          </div>
+
+          <ul className="mt-5 space-y-2.5 text-sm">
+            {anomalies.map((a, i) => (
+              <li key={i} className="flex items-start gap-2.5">
+                <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[var(--danger)] shrink-0" />
+                <span className="text-muted-foreground">
+                  [{a.type}] {a.message}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <button className="mt-5 w-full px-4 py-2.5 rounded-xl bg-[var(--danger)]/15 hover:bg-[var(--danger)]/25 border border-[var(--danger)]/30 text-[var(--danger)] text-sm font-semibold transition">
+            Review Anomalies
+          </button>
           </Panel>
         </div>
 

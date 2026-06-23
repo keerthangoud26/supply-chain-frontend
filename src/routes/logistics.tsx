@@ -1,18 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Truck } from "lucide-react";
 import { AppShell } from "@/components/dashboard/AppShell";
-import { PageStub } from "@/components/dashboard/PageStub";
+import { LogisticsPage } from "@/components/dashboard/LogisticsPage";
 
 export const Route = createFileRoute("/logistics")({
   head: () => ({
     meta: [
-      { title: "Logistics Analytics — Nexus Supply Chain AI" },
-      { name: "description", content: "Carrier performance, route optimization and cost analysis across transport modes." },
+      { title: "Logistics Analytics — SupplySense AI" },
+      {
+        name: "description",
+        content: "Transportation mode and shipping cost analytics",
+      },
     ],
   }),
+
   component: () => (
     <AppShell title="Logistics Analytics">
-      <PageStub title="Logistics Analytics" subtitle="Carrier performance, route optimization and cost analysis across transport modes." icon={Truck} accent="pink" />
+      <LogisticsPage />
     </AppShell>
   ),
 });

@@ -70,7 +70,7 @@ export function Sidebar() {
             <span className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-[var(--success)] ring-2 ring-card pulse-dot" />
           </div>
           <div className="min-w-0">
-            <div className="text-sm font-semibold truncate">Keerthan G</div>
+            <div className="text-sm font-semibold truncate">Keerthan M</div>
             <div className="text-[11px] text-muted-foreground truncate">AI Systems Engineer</div>
           </div>
         </div>
